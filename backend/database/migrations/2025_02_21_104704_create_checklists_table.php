@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('checklists', function (Blueprint $table) {
             $table->id();
-            $table->string('username')->unique();
-            $table->string('email')->unique();
-            $table->string('photo_url')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->foreignId('task_id')->constrained('tasks')->cascadeOnDelete();
+            $table->string('item');
+            $table->boolean('is_completed')->default(false);
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('checklists');
     }
 };
