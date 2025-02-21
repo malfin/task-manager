@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Checklist extends Model
+{
+    use HasFactory;
+
+    protected $fillable = ['task_id', 'item', 'is_completed'];
+
+    public function task()
+    {
+        return $this->belongsTo(Task::class);
+    }
+}
