@@ -11,6 +11,20 @@ class Task extends Model
 
     protected $fillable = ['title', 'description', 'deadline', 'status', 'created_by', 'project_id'];
 
+    const STATUS_NEW = 'new';
+    const STATUS_IN_PROGRESS = 'in_progress';
+    const STATUS_COMPLETED = 'completed';
+    const STATUS_ON_HOLD = 'on_hold';
+    const STATUS_CANCELLED = 'cancelled';
+
+    public static array $statuses = [
+        self::STATUS_NEW,
+        self::STATUS_IN_PROGRESS,
+        self::STATUS_COMPLETED,
+        self::STATUS_ON_HOLD,
+        self::STATUS_CANCELLED,
+    ];
+
     public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');
