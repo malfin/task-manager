@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('task_id')->constrained('tasks')->cascadeOnDelete();
+            $table->foreignId('uploaded_by')->constrained('users')->cascadeOnDelete();
+            $table->string('file_url');
             $table->timestamps();
         });
     }
