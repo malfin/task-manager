@@ -38,9 +38,11 @@ class RegistrationRequest extends FormRequest
             'password.required' => 'Password обязателен для заполнения',
             'password.min' => 'Password не меньше 8 символов',
             'password.confirmed' => 'Подтверждение пароля не совпадает',
+            'password_confirmation.required' => 'Подтверждение пароля обязательно для заполнения',
             'username.unique' => 'Данное имя пользователя уже занято',
             'email.unique' => 'Данный email уже занят',
-
+            'email.email' => 'Введите корректный email',
+            'photo_url.image' => 'Файл не является изображением',
         ];
     }
 }

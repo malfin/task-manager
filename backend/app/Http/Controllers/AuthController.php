@@ -11,7 +11,7 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
     /**
@@ -34,8 +34,18 @@ class AuthController extends Controller
     {
         // Получаем валидированные данные
         $data = $request->validated();
-
-        // Хешируем пароль перед сохранением
+        
+        // Обработка загрузки фото
+        if ($request->hasFile('photo_url')) {
+            $datePath = now()->format('Y/m/d');
+            $username = $data['username'];
+            $path = $request->file('photo_url')->storeAs(
+                "photos/{$datePath}/{$username}",
+                $request->file('photo_url')->getClientOriginalName(),
+                'public'
+            );
+            $data['photo_url'] = $path;
+        }
         $data['password'] = Hash::make($data['password']);
 
         // Создаем пользователя
@@ -56,8 +66,8 @@ class AuthController extends Controller
     public function me()
     {
         return response()->json([
-            'message'=>'Информация о пользователе',
-            'user'=>auth()->user()
+            'message' => 'Информация о пользователе',
+            'user' => auth()->user()
         ]);
     }
 
