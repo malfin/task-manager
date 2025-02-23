@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
     ];
@@ -29,8 +29,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password'
     ];
 
     /**
@@ -39,7 +38,36 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'created_by');
+    }
+
+    public function projectMembers()
+    {
+        return $this->hasMany(ProjectMember::class);
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'created_by');
+    }
+
+    public function taskAssignments()
+    {
+        return $this->hasMany(TaskAssignment::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function files()
+    {
+        return $this->hasMany(File::class, 'uploaded_by');
+    }
 }
