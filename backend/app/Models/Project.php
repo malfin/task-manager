@@ -9,11 +9,11 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'created_by'];
+    protected $fillable = ['name', 'description', 'crated_by'];
 
     public function creator()
     {
-        return $this->belongsTo(User::class, 'created_by');
+        return $this->belongsTo(User::class, 'crated_by');
     }
 
     public function members()

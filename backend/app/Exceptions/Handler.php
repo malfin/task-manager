@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -26,5 +27,16 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+    /**
+     * Convert an authentication exception into a response.
+     *
+     * @param Request $request
+     * @param \Illuminate\Auth\AuthenticationException $exception
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function unauthenticated($request, \Illuminate\Auth\AuthenticationException $exception)
+    {
+        return response()->json(['error' => 'Вы не авторизованы'], 401);
     }
 }

@@ -34,7 +34,7 @@ class AuthController extends Controller
     {
         // Получаем валидированные данные
         $data = $request->validated();
-        
+
         // Обработка загрузки фото
         if ($request->hasFile('photo_url')) {
             $datePath = now()->format('Y/m/d');

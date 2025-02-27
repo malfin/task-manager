@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('project_members', function (Blueprint $table) {
             $table->foreignId('project_id')->constrained('projects')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            // 2 роли: администратор, пользователь, (наблюдатель)
             $table->string('role');
             $table->primary(['project_id', 'user_id']);
             $table->timestamps();

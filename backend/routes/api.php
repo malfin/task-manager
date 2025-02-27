@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +26,10 @@ Route::prefix('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
     Route::post('/refresh', [AuthController::class, 'refresh'])->name('auth.refresh');
     Route::post('/me', [AuthController::class, 'me'])->name('auth.me');
+});
+
+Route::prefix('projects')->group(function () {
+    Route::get('/', [ProjectController::class, 'index'])->name('project.indexr');
+    Route::post('/create', [ProjectController::class, 'create'])->name('project.create');
+    Route::post('/{projectId}/members', [ProjectController::class, 'addMember'])->name('project.add-member');
 });
