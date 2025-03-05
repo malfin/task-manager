@@ -17,9 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
@@ -39,4 +36,7 @@ Route::prefix('projects/{projectId}')->group(function () {
     Route::get('/tasks', [TaskController::class, 'index'])->name('task.index');
     Route::post('/tasks/create', [TaskController::class, 'create'])->name('task.create');
     Route::put('/tasks/{taskId}/status', [TaskController::class, 'updateStatus'])->name('task.updateStatus');
+    Route::put('/tasks/{taskId}/update', [TaskController::class, 'update'])->name('task.update');
 });
+
+Route::get('/tasks/filter', [TaskController::class, 'filter'])->name('task.filter');
