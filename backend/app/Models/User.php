@@ -72,6 +72,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(File::class, 'uploaded_by');
     }
 
+    public function assignedTasks()
+    {
+        return $this->belongsToMany(Task::class, 'task_user');
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -91,4 +96,6 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+
 }

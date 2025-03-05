@@ -54,4 +54,9 @@ class Task extends Model
     {
         return $this->hasMany(Checklist::class);
     }
+
+    public function assignees()
+    {
+        return $this->belongsToMany(User::class, 'task_user');
+    }
 }
