@@ -20,6 +20,7 @@ const Headers = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const logout = useAuthStore((state)=>state.logout)
+    const isAuthenticated = useAuthStore((state)=>state.isAuthenticated);
 
     const handleLogout = () => {
         logout();
@@ -32,7 +33,6 @@ const Headers = () => {
         { text: 'Выйти', path: '#', icon: <LoginIcon />, action: handleLogout }
     ];
 
-    // Меню для десктопов
     const desktopMenu = (
         <Box sx={{ display: 'flex', gap: 2 }}>
             {menuItems.map((item) => (
