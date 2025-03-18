@@ -1,0 +1,575 @@
+{
+	"info": {
+		"_postman_id": "534b4746-2746-42d0-b470-123ca249c464",
+		"name": "Трекер задач для командной работы",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12712614"
+	},
+	"item": [
+		{
+			"name": "Аутентификация",
+			"item": [
+				{
+					"name": "Регистрация",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "user2",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "user2@mail.ru",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password1",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "password1",
+									"type": "text"
+								},
+								{
+									"key": "photo_url",
+									"type": "file",
+									"src": "/Users/aleksejpuhov/Pictures/Изображения/SyelLl6FGxM.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Авторизация",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin2\",\n    \"password\": \"password2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Обновление токена",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/auth/refresh",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Выход",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin1\",\n    \"password\": \"password1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/logout",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Информация о пользователе",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/auth/me",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Проект",
+			"item": [
+				{
+					"name": "Все проекты",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/projects/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создание проекта",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Название проекта\",\n    \"description\": \"Какое-то описание\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/projects/create",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Добавить пользователя в проект",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 2,\n    \"role\": \"Участник\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/projects/1/members",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects",
+								"1",
+								"members"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Задачи",
+			"item": [
+				{
+					"name": "Получение списка всех задач",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/projects/1/tasks",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects",
+								"1",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cортировать и просматривать задачи по пользователю, по проекту, по дате дедлайна",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/projects/1/tasks/filter",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects",
+								"1",
+								"tasks",
+								"filter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создание задачи",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Обновить систему\",\n    \"description\": \"Описание задачи\",\n    \"deadline\": \"2023-12-31 23:59:59\",\n    \"status\": \"new\",\n    \"assignees\": [2]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/projects/1/tasks/create",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects",
+								"1",
+								"tasks",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Обновление статуса",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"done\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/projects/1/tasks/1/status",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects",
+								"1",
+								"tasks",
+								"1",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Обновление задачи",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"done\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/projects/1/tasks/1/update",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"projects",
+								"1",
+								"tasks",
+								"1",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "https://api.task-manager.kpk45.ru/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YxL2F1dGgvbG9naW4iLCJpYXQiOjE3NDAzMTU0MTcsImV4cCI6MTc0MDMxOTAxNywibmJmIjoxNzQwMzE1NDE3LCJqdGkiOiI2a0dXUU51elU3RnpxOHFLIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.ZxDA_-r19KxM6_0olGAa8hm5UK7p1p_PTTBU3qICrVw",
+			"type": "string"
+		}
+	]
+}
