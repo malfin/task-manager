@@ -1,0 +1,57 @@
+
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: laravel-backend
+    volumes:
+      - ./backend:/var/www
+    networks:
+      - app-network
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_DATABASE=task-manager
+      - DB_USERNAME=task-manager
+      - DB_PASSWORD=task-manager
+    depends_on:
+      - postgres
+    ports:
+      - "8000:8000"
+      
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: react-frontend
+    volumes:
+      - ./frontend:/app
+    networks:
+      - app-network
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  postgres:
+    image: postgres:13
+    container_name: postgres-db
+    environment:
+      - POSTGRES_DB=task-manager
+      - POSTGRES_USER=task-manager
+      - POSTGRES_PASSWORD=task-manager
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    ports:
+      - "5432:5432"
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
