@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,3 +41,4 @@ Route::prefix('projects/{projectId}')->group(function () {
 });
 
 Route::get('/tasks/filter', [TaskController::class, 'filter'])->name('task.filter');
+Route::get('/users', [UserController::class, 'index'])->name('user.index');

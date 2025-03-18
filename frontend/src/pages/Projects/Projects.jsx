@@ -44,7 +44,7 @@ const Projects = () => {
                                     {project.description}
                                 </Typography>
                                 <Typography variant="caption" display="block" sx={{ mt: 1 }}>
-                                    Автор: {project.created_by}
+                                    Автор: {project.crated_by}
                                 </Typography>
                                 <Typography variant="caption" display="block">
                                     Дата создания: {new Date(project.created_at).toLocaleString()}

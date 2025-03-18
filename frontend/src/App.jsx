@@ -8,6 +8,7 @@ import Headers from "./components/Headers.jsx";
 import useAuthStore from "./state/authStore.js";
 import {Register} from "./pages/";
 import Projects from "./pages/Projects/Projects.jsx";
+import Tasks from "./pages/Tasks/Tasks.jsx";
 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
                     <Routes>
                         <Route path="/" element={<Protected />}>
                             <Route path="/" element={<Projects/>} />
+                            <Route path="/projects/:id/" element={<Tasks/>} />
                         </Route>
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
